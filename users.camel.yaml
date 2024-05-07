@@ -1,0 +1,39 @@
+- route:
+    id: route-1079
+    from:
+      id: Generate-data
+      uri: timer:trigger
+      parameters:
+        period: "3000"
+        repeatCount: "1"
+      steps:
+        - to:
+            uri: https://random-data-api.com/api/v2/users
+            parameters: {}
+        - unmarshal:
+            json: {}
+        - transform:
+            expression:
+              simple:
+                expression: '{ "userId": ${body[id]}, "userName": "${body[username]}",
+                  "userEmail": "${body[email]}" }'
+        - log:
+            id: log-3647
+            message: ${body}
+        - setHeader:
+            id: setHeader-4261
+            expression:
+              jsonpath:
+                expression: $.userId
+            name: CamelAwsS3Key
+        - log:
+            id: log-1509
+            message: header = ${header.CamelAwsS3Key}
+        - marshal:
+            json: {}
+        - log:
+            id: log-3163
+            message: body ${body} and header ${header.CamelAwsS3Key}
+        - to:
+            id: to-4233
+            uri: aws2-s3://zbendhib-bucket
