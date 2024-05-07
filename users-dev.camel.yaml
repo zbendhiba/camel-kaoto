@@ -17,23 +17,14 @@
               simple:
                 expression: '{ "userId": ${body[id]}, "userName": "${body[username]}",
                   "userEmail": "${body[email]}" }'
-        - log:
-            id: log-3647
-            message: ${body}
         - setHeader:
             id: setHeader-4261
             expression:
               jsonpath:
                 expression: $.userId
             name: CamelAwsS3Key
-        - log:
-            id: log-1509
-            message: header = ${header.CamelAwsS3Key}
         - marshal:
             json: {}
-        - log:
-            id: log-3163
-            message: body ${body} and header ${header.CamelAwsS3Key}
         - to:
             id: to-4233
             uri: aws2-s3://zbendhib-bucket

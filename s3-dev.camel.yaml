@@ -10,4 +10,4 @@
       steps:
         - log:
             id: log-1084
-            message: template message
+            message: body is ${body}
