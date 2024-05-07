@@ -37,3 +37,7 @@
         - to:
             id: to-4233
             uri: aws2-s3://zbendhib-bucket
+            parameters:
+              accessKey: ${AWS_SECRET_KEY}
+              region: eu-west-3
+              secretKey: ${AWS_SECRET_KEY}

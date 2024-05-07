@@ -1,0 +1,13 @@
+- route:
+    id: route-3771
+    from:
+      id: from-1486
+      uri: aws2-s3://zbendhib-bucket
+      parameters:
+        accessKey: ${AWS_ACCESS_KEY}
+        region: eu-west-3
+        secretKey: ${AWS_SECRET_KEY}
+      steps:
+        - log:
+            id: log-1084
+            message: template message
